@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * Spring Boot的启动类</p>
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Import;
  */
 @SpringBootApplication // 标明该类是Spring Boot应用的启动类（引导类），也即标明该应用是一个Spring Boot应用
 // 默认扫描该类所在包及其子包下面的组件（component），其它路径是扫描不到的，最佳实践是该类一般放在所有类的父级目录下。
+//@ImportResource(locations = {"classpath:spring.xml"})// 导入外部资源文件，比如xml
 public class App {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
