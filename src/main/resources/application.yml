@@ -1,7 +1,22 @@
 #yml语法可在百度上搜索
 #server:
-#  port: 8081
-  
+#  port: 8091
+#spring:
+#  profiles:
+#    active: prod
+
+#---
+#server:
+#  port: 8092
+#spring:
+#  profiles: dev
+
+#--- 
+#server:
+#  port: 8093
+#spring:
+#  profiles: prod
+    
 #和实体类映射
 #person:
 #  name1: zhangsan
