@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -22,10 +20,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- spring-boot-starter是Spring Boot的场景启动器，根据不同的应用场景会有不同的场景启动器，
-			比如针对web应用会有web启动器——spring-boot-starter-web，类似的还有spring-boot-starter-tomcat、spring-boot-starter-quartz等。
-			在spring-boot-starter-web里面依赖了与web有关的相关启动器
-		 -->
+		<!-- spring-boot-starter是Spring Boot的场景启动器，根据不同的应用场景会有不同的场景启动器， 比如针对web应用会有web启动器——spring-boot-starter-web，类似的还有spring-boot-starter-tomcat、spring-boot-starter-quartz等。 在spring-boot-starter-web里面依赖了与web有关的相关启动器 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -40,6 +35,15 @@
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!--热部署，修改代码不需要重启服务直接生效，一般用于开发环境 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 	</dependencies>
 

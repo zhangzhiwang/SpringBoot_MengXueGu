@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+spb默认在以下四个位置加载静态文件（比如页面文件）：
+classpath:/META-INF/resources/
+classpath:/resources/
+classpath:/static/
+classpath:/public/
+
+spb默认将文件名为index.html的文件当作欢迎页，欢迎页可以放在上面路径中的任意一个。
+访问欢迎页时可以在url里指明index.html也可以不指明，比如http://localhost:8080/index.html和http://localhost:8080都会访问到欢迎页，当url中不指明index.html时spb回去上面的四个路径去查找文件名时index.html的文件
+
+Spring Boot 会在静态资源目录下 与 根路径(按该顺序) 查找 favicon.ico 页面;
+如果存在这样名称的文件，Spring Boot 会自动将其设置网页图标。
+-->
+
+欢迎页
+</body>
+</html>

@@ -1,8 +1,9 @@
 package com.asiainfo;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,5 +35,17 @@ public class HelloController {
 		
 		UserService bean = (UserService) app.getBean("us123");
 		System.out.println("bean = " + bean);
+	}
+	
+	@RequestMapping("/test2")
+	public String test2(Map<String, Object> map) {
+		/**
+		 * 默认情况下spb工程会被打包成jar包而不是war包，内嵌的tomcat不支持以jar包的形式运行jsp，所以spb官方推荐使用模版引擎thymeleaf。
+		 * 和Spring MVC一样，thymeleaf负责视图的解析和与数据的渲染，将后台返回的逻辑视图名拼上前缀和后缀，前缀默认是classpath:/templates，后缀默认是html。
+		 * 本例中，thymeleaf会去找classpath:/templates/success.html
+		 */
+		map.put("name", "zhangsan");
+		System.out.println(11);
+		return "success";
 	}
 }
