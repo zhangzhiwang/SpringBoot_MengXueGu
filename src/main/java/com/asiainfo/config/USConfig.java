@@ -18,7 +18,7 @@ public class USConfig {
 	 * @author zhangzhiwang
 	 * @date May 30, 2020 11:58:22 PM
 	 */
-	@Bean
+//	@Bean
 	public UserService us123() {
 		return new UserService();
 	}

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 // 注意：属性必须要有setter方法，映射的时候是通过调用setter方法设置值的
 // 另外，和Spring一样，既然是通过setter方法注入那么配置文件的属性名必须和setter方法名去掉前面的“set”后将剩下的部分首字母小写后的名字一致，不一定和POJO的属性名一致，但一般是一致的。
 // 还有，@ConfigurationProperties默认从spb的全局配置文件中读取
-@PropertySource(value = {"classpath:person.properties"})
+//@PropertySource(value = {"classpath:person.properties"})
 public class Person {
 //	@Value("${person.name1}")// @Value注解中的${}是从配置文件中读取值，${}里面是配置文件中属性的key
 	// 注意：通过@ConfigurationProperties注解注入属性值，属性必须要有setter方法，而通过@Value注解注入不需要setter方法

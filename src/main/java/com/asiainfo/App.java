@@ -1,5 +1,7 @@
 package com.asiainfo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigurationImportSelector;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
@@ -28,7 +30,12 @@ import org.springframework.context.annotation.ImportResource;
 // 默认扫描该类所在包及其子包下面的组件（component），其它路径是扫描不到的，最佳实践是该类一般放在所有类的父级目录下。
 //@ImportResource(locations = {"classpath:spring.xml"})// 导入外部资源文件，比如xml
 public class App {
+	private static final Logger LOG = LoggerFactory.getLogger(App.class);
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
+		LOG.debug("debug信息");
+		LOG.info("info信息");
+		LOG.warn("warn信息");
+		LOG.error("error信息");
 	}
 }

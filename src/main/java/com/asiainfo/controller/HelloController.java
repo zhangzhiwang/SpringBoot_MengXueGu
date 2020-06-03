@@ -1,9 +1,10 @@
-package com.asiainfo;
+package com.asiainfo.controller;
 
-import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,12 +16,16 @@ import com.asiainfo.service.UserService;
 @Controller
 @RequestMapping("helloController")
 public class HelloController {
+	private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private Person person;
 	@Autowired
 	private UserService us;
-	@Autowired
-	private ApplicationContext app;
+//	@Autowired
+//	private ApplicationContext app;
 	
 	@RequestMapping("/hello")
 	@ResponseBody
@@ -33,19 +38,14 @@ public class HelloController {
 		System.out.println("person = " + person);
 		System.out.println("us = " + us);
 		
-		UserService bean = (UserService) app.getBean("us123");
-		System.out.println("bean = " + bean);
-	}
-	
-	@RequestMapping("/test2")
-	public String test2(Map<String, Object> map) {
-		/**
-		 * 默认情况下spb工程会被打包成jar包而不是war包，内嵌的tomcat不支持以jar包的形式运行jsp，所以spb官方推荐使用模版引擎thymeleaf。
-		 * 和Spring MVC一样，thymeleaf负责视图的解析和与数据的渲染，将后台返回的逻辑视图名拼上前缀和后缀，前缀默认是classpath:/templates，后缀默认是html。
-		 * 本例中，thymeleaf会去找classpath:/templates/success.html
-		 */
-		map.put("name", "zhangsan");
-		System.out.println(11);
-		return "success";
+//		UserService bean = (UserService) app.getBean("us123");
+//		System.out.println("bean = " + bean);
+		
+		LOG.debug("HelloController debug信息");
+		LOG.info("HelloController info信息");
+		LOG.warn("HelloController warn信息");
+		LOG.error("HelloController error信息");
+		
+		userService.test1();
 	}
 }
