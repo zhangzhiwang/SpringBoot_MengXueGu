@@ -33,9 +33,9 @@ public class App {
 	private static final Logger LOG = LoggerFactory.getLogger(App.class);
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
-		LOG.debug("debug信息");
-		LOG.info("info信息");
-		LOG.warn("warn信息");
-		LOG.error("error信息");
+//		LOG.debug("debug信息");
+//		LOG.info("info信息");
+//		LOG.warn("warn信息");
+//		LOG.error("error信息");
 	}
 }
