@@ -1,4 +1,8 @@
 package com.asiainfo.controller;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,28 +66,33 @@ public class HelloController {
 	
 	@RequestMapping("/test1")
 	public void test1() {
-		System.out.println("person = " + person);
-		System.out.println("us = " + us);
+//		System.out.println("person = " + person);
+//		System.out.println("us = " + us);
 		
 //		UserService bean = (UserService) app.getBean("us123");
 //		System.out.println("bean = " + bean);
 		
-		LOG.debug("HelloController debug信息");
-		LOG.info("HelloController info信息");
-		LOG.warn("HelloController warn信息");
-		LOG.error("HelloController error信息");
+//		LOG.debug("HelloController debug信息");
+//		LOG.info("HelloController info信息");
+//		LOG.warn("HelloController warn信息");
+//		LOG.error("HelloController error信息");
 		
-		userService.test1();
+//		userService.test1();
 	}
 	
-	@RequestMapping("/test2")// @PostMapping = @RequestMapping(method = RequestMethod.POST)
+	@RequestMapping("/test2")
 	public String test2() {
-		System.out.println("test2");
+		return "aaa/success";// 注意目录aaa前面不能加“/”，因为他默认查找的路径是“classpath:/templates/”，后面已经写了“/”
+	}
+	
+	@RequestMapping("/test3")// @PostMapping = @RequestMapping(method = RequestMethod.POST)
+	public String test3() {
+		System.out.println("test3");
 		return "redirect:helloController/test3";
 	}
 	
-	@RequestMapping("/test3")
-	public String test3() {
-		return "test3";
+	@RequestMapping("/test4")
+	public String test4() {
+		return "test4";
 	}
 }
