@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.mapper.BillMaper">
+	<select id="getBillById" parameterType="int" resultType="com.asiainfo.entity.Bill">
+		select * from bill where bid=#{id}
+	</select>
+	
+	<insert id="insertBill" parameterType="com.asiainfo.entity.Bill" useGeneratedKeys="true" keyProperty="bid">
+		insert into bill (bill_code,bill_name) values (#{billCode},#{billName})
+	</insert>
+</mapper>

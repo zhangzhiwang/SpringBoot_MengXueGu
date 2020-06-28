@@ -37,3 +37,22 @@
 #  testMap: {key1: value1,key2: value2}
 #  date: 2020-01-01
 #  timestamp: 2020-02-02 00:00:00
+
+#整合Mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: zzw1234
+#spb整合数据持久技术Spring Data-JPA
+  jpa:
+    hibernate: #jpa技术是ORM规范，hibernate是jpa规范的一种实现，jpa底层也使用hibernate来实现
+      ddl-auto: create #根据实体类自动在数据库建表（create）或者更新表结构（update）
+    show-sql: true #在控制台打印语句
+ 
+#spb整合MyBatis
+#spb整合MyBatis有两种方式：一个是通过注解进行整合，一个是通过配置文件进行整合，二者选其一即可
+mybatis:
+  mapper-locations: classpath:myBatisConfig/mapper/BillMapper.xml
+  config-location: classpath:myBatisConfig/MaBatisConfig.xml
