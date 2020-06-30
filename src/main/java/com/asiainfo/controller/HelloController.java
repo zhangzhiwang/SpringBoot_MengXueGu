@@ -78,7 +78,9 @@ public class HelloController {
 //		redisTemplate.opsForValue().get("key1");// 本机事先安装好redis
 //		System.out.println("redisTemplate = " + redisTemplate);
 //		System.out.println("sessionFactory = " + sessionFactory);
-		System.out.println("zzwTemplate = " + zzwTemplate);
+//		System.out.println("zzwTemplate = " + zzwTemplate);
+		String name = zzwTemplate.getName();
+		System.out.println(name);
 		return "Hello World!";
 	}
 	
