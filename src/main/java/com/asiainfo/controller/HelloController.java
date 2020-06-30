@@ -14,11 +14,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asiainfo.entity.Person;
+import com.asiainfo.service.TaskService;
 import com.asiainfo.service.UserService;
+import com.asiainfo1.template.ZzwTemplate;
 
 // Spring Boot完全可以当作Spring MVC玩，完全可以使用Spring MVC的注解，因为Spring Boot默认依赖了Spring MVC的jar包
 @RestController// = @Controller + @ResponseBody
@@ -39,6 +43,18 @@ public class HelloController {
 	private static Map<String, String> userMap;
 	@Autowired
 	private DataSource dataSource;
+	@Autowired
+	private TaskService taskService;
+	/**
+	 * 在mvc中整合redis需要在xml中进行整合配置，在spb中我们即没有进行手动配置xml也没有手动写配置类，下面的redisTemplate既然能够被Autowired说明该对象已存在于IOC容器中，那么这个工作是谁作的呢？</p>
+	 * 答案是spb的自动装配。spb和redis的整合只在pom文件中引入有redis的starter即可，无需其他工作。
+	 * */
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
+	@Autowired
+	private SqlSessionFactory sessionFactory;
+	@Autowired
+	private ZzwTemplate zzwTemplate;
 	
 	static {
 		userMap = new HashMap();
@@ -58,6 +74,11 @@ public class HelloController {
 	@RequestMapping("/hello")
 //	@ResponseBody
 	public String hello() {
+//		System.out.println(taskService);
+//		redisTemplate.opsForValue().get("key1");// 本机事先安装好redis
+//		System.out.println("redisTemplate = " + redisTemplate);
+//		System.out.println("sessionFactory = " + sessionFactory);
+		System.out.println("zzwTemplate = " + zzwTemplate);
 		return "Hello World!";
 	}
 	

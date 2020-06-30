@@ -31,6 +31,7 @@ import com.asiainfo.interceptor.LoginInterceptor;
  * @author zhangzhiwang
  * @date Jun 11, 2020 1:12:20 PM
  */
+// 一些注解要确定是Spring原生的还是spb的，可以看一下导入注解的包，像@Configuration、@Import、@Bean等都是Spring的原生注解
 //@Configuration // 标明该类是一个配置类，相当于MVC中的xml配置文件
 @Import({USConfig.class})// 导入另一个配置文件，相当于MVC中在一个xml文件中导入另一个xml文件，即<import/>标签
 public class MySpringMVCConfig {

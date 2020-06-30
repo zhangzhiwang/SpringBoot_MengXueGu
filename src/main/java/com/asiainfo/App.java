@@ -3,16 +3,26 @@ package com.asiainfo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigurationImportSelector;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.asiainfo.annotation.EnableZzw;
+import com.asiainfo.config.TaskConfig;
+import com.asiainfo.service.TaskService;
 
 /**
  * Spring Boot的启动类</p>
@@ -76,11 +86,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     <property name="dataSource" ref="dataSource"/>
 </bean>
  */
+//@EnableScheduling// 启动定时任务组件
+//@EnableZzw
 public class App {// extends SpringBootServletInitializer //使用外部容器
 	private static final Logger LOG = LoggerFactory.getLogger(App.class);
 	
 	// 使用外部容器时使用此方法
-//	@Override
+//	@Override@
 //	public SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 //		return builder.sources(App.class);
 //	}
@@ -99,5 +111,24 @@ public class App {// extends SpringBootServletInitializer //使用外部容器
 		 * 3、将pom文件里的tomcat启动器的scope属性设置为provided
 		 * 4、增加web.xml文件
 		 */
+		
+		// 测试mvc环境下（非spb环境）的定时任务，使用xml配置
+//		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring.xml");
 	}
 }
+
+/**
+spb自动装配原理：
+思考一个问题：在spb中整合第三方组件（比如redis）的方式是引入相关组件的启动器（starter），不需要做其他任何配置，然后就可以在代码里面Autowired该组件的对象，这个是怎么做到的？被引入的对象是什么时候被实例化的并放入IOC容器里面的？
+spb的“约定优于配置”的原则就起作用了，spb约定：任何第三方组件必须在starter的工程目录里（对本项目来说当然是jar包）的classpath:META-INFO目录下有一个名为spring.factories的文件，即classpath:META-INFO/spring.factories。
+将本starter工程所有的配置类的全路径名配置在该文件中，spb在启动的时候会扫描所有starter的该目录下面的spring.factories文件，并通过反射加载所有配置类，进而解析配置类中标注了@Bean方法，从而将所需要的bean放入IOC容器里面。
+
+这里要说明几点：
+1、classpath:META-INFO下的spring.factories文件并不是spb要求的，是Spring要求有的，里面不止配置了配置类的全路径还可能有其他跟spb无关的配置，所以spring.factories不是为加载配置类而特有的文件。
+2、上面所说的约定是针对第三方组件而言的，spb的组件分为两种：一种是spb自带的，一种是第三方提供的。如何区分呢？spb自带的starter组件的明明规则是spring-boot-starter-***，而第三方组件的明明规则是***-spring-boot-starter。
+	对spb自带的starter组件而言，classpath:META-INF下不需要有spring.factories文件，所有这些组件的配置类都在spring-boot-autoconfigure-[版本号].jar里面的classpath:META-INF/spring.factories进行配置
+3、所有spring.factories里面对配置类进行配置的key统一为org.springframework.boot.autoconfigure.EnableAutoConfiguration（spb的@EnableAutoConfiguration注解类的全限定名），value是各配置类的全限定名
+4、了解spb自动装配的源码，路径为：@SpringBootApplication->@EnableAutoConfiguration->@Import里面导入的类，也可以自定义ImportSelector和自定义注解来实现自动转配，如本工程的ZzwImportSelector和@EnableZzw
+
+其实spb的自动装配就解决一个问题——到哪里找第三方组件的配置类并装配该组件所必须的bean
+*/

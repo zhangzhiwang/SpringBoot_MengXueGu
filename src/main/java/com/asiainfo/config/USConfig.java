@@ -1,8 +1,10 @@
 package com.asiainfo.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
+import com.asiainfo.service.TaskService;
 import com.asiainfo.service.UserService;
 
 @Configuration// spring原生注解，标识该类是一个配置类
@@ -21,5 +23,11 @@ public class USConfig {
 //	@Bean
 	public UserService us123() {
 		return new UserService();
+	}
+	
+	@Bean
+	@Conditional({MyCondition.class, MyCondition2.class})// 满足条件的时候会创建bean并放入容器中，如果不满足则不创建，多个条件之间是并且的关系
+	public TaskService taskService() {
+		return new TaskService();
 	}
 }
