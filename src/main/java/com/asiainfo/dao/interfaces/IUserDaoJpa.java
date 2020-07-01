@@ -12,6 +12,6 @@ import com.asiainfo.entity.UserJpa;
  * @date Jun 16, 2020 3:55:18 PM
  */
 @Repository
-public interface IUserDaoJpa extends JpaSpecificationExecutor<UserJpa>{
+public interface IUserDaoJpa extends JpaSpecificationExecutor<Object>{
 
 }

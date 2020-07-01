@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 //@Service
 public class TaskService {
 	
-	@Scheduled(fixedRate = 1000)
+//	@Scheduled(fixedRate = 1000)
 	public void hello() {
 		System.out.println("hello");
 	}

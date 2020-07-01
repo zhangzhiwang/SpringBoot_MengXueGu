@@ -11,14 +11,15 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.asiainfo.annotation.EnableZzw;
@@ -35,10 +36,12 @@ import com.asiainfo.service.TaskService;
 /**
  * 点进@SpringBootApplication注解，比较重要的注解有三个：
  *  @SpringBootConfiguration	标明该类是一个Spring Boot的配置类
- *  	引用注解@Configuration，该注解是Spring的一个原生注解，标明该类是一个配置类，作用等同于xml
-	@EnableAutoConfiguration	标明启动自动配置
-		@AutoConfigurationPackage 自动扫名启动类所在包及其子包下面所有的组件并添加到Spring IOC容器中
-		@Import(AutoConfigurationImportSelector.class) AutoConfigurationImportSelector类将自动导入好多默认配置类，这类配置类大多以AutoConfiguration结尾
+ *  	引用注解@Configuration，该注解是Spring的一个原生注解，标明该类是一个配置类，作用等同于xml，配置类的作用就是提供额外的bean到ioc容器中或者导入其他配置类
+ *  	@Configuration引用注解@Component，表明该类被Spring托管
+ *  所以，@SpringBootConfiguration=@Configuration=@Component，即@SpringBootConfiguration的作用就是标明该类是一个配置类，作用相当于xml，其对象会被Spring托管
+	@EnableAutoConfiguration	标明启动自动装配
+		@AutoConfigurationPackage 自动扫描该类所在包及其子包下面所有的组件并添加到Spring IOC容器中，所以spb自动扫描启动类所在包及其子包的原理就在这个注解上
+		@Import(AutoConfigurationImportSelector.class) AutoConfigurationImportSelector类将自动导入好多默认配置类，这类配置类的名称大多以AutoConfiguration结尾
 	@ComponentScan	组件扫面的范围，类似于Spring MVC中xml里的ComponentScan标签
  */
 @SpringBootApplication // 标明该类是Spring Boot应用的启动类（引导类），也即标明该应用是一个Spring Boot应用

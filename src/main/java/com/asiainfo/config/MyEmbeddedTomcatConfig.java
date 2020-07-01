@@ -1,9 +1,6 @@
 package com.asiainfo.config;
 
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * spb内嵌servlet容器（默认内嵌tomcat）配置修改
@@ -24,15 +21,15 @@ public class MyEmbeddedTomcatConfig {
 	 * @author zhangzhiwang
 	 * @date Jun 15, 2020 12:02:47 PM
 	 */
-	@Bean
-	public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer(){
-		return new EmbeddedServletContainerCustomizer() {
-
-			@Override
-			public void customize(ConfigurableEmbeddedServletContainer container) {
-				// TODO Auto-generated method stub
-				container.setPort(8081);
-				container.setContextPath("/zzw");
-			}};
-	}
+//	@Bean
+//	public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer(){
+//		return new EmbeddedServletContainerCustomizer() {
+//
+//			@Override
+//			public void customize(ConfigurableEmbeddedServletContainer container) {
+//				// TODO Auto-generated method stub
+//				container.setPort(8081);
+//				container.setContextPath("/zzw");
+//			}};
+//	}
 }

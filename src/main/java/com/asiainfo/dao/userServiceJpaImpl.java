@@ -1,6 +1,7 @@
 package com.asiainfo.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,32 +20,35 @@ import com.asiainfo.entity.UserJpa;
 public class userServiceJpaImpl implements IUserDaoJpa {
 
 	@Override
-	public UserJpa findOne(Specification<UserJpa> spec) {
-		return null;
-	}
-
-	@Override
-	public List<UserJpa> findAll(Specification<UserJpa> spec) {
+	public Optional<Object> findOne(Specification<Object> spec) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<UserJpa> findAll(Specification<UserJpa> spec, Pageable pageable) {
+	public List<Object> findAll(Specification<Object> spec) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<UserJpa> findAll(Specification<UserJpa> spec, Sort sort) {
+	public Page<Object> findAll(Specification<Object> spec, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public long count(Specification<UserJpa> spec) {
+	public List<Object> findAll(Specification<Object> spec, Sort sort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count(Specification<Object> spec) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }
