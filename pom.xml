@@ -4,8 +4,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<!-- <version>2.3.0.RELEASE</version> -->
-		<version>1.5.8.RELEASE</version>
+		<version>2.3.1.RELEASE</version>
+<!-- 		<version>1.5.8.RELEASE</version> -->
 	</parent>
 
 	<groupId>com.asiainfo</groupId>
@@ -22,12 +22,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- spring-boot-starter是Spring Boot的场景启动器，根据不同的应用场景会有不同的场景启动器， 比如针对web应用会有web启动器——spring-boot-starter-web，类似的还有spring-boot-starter-tomcat、spring-boot-starter-quartz等。
-		在spring-boot-starter-web里面依赖了与web有关的相关启动器。
-		启动器的作用主要有两点：
-		1、管理本组件所依赖的所有jar包，这些jar包互相之间肯定是兼容的，以防自己去管理依赖jar包出现版本冲突的问题
-		2、配置本组件所有必须的bean，以便在和spb整合时进行自动装配
-		 -->
+		<!-- spring-boot-starter是Spring Boot的场景启动器，根据不同的应用场景会有不同的场景启动器， 比如针对web应用会有web启动器——spring-boot-starter-web，类似的还有spring-boot-starter-tomcat、spring-boot-starter-quartz等。 在spring-boot-starter-web里面依赖了与web有关的相关启动器。 启动器的作用主要有两点： 1、管理本组件所依赖的所有jar包，这些jar包互相之间肯定是兼容的，以防自己去管理依赖jar包出现版本冲突的问题 2、配置本组件所有必须的bean，以便在和spb整合时进行自动装配 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -54,7 +49,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<version>2.1.6.RELEASE</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -102,16 +96,25 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<!-- 整合redis -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<!-- <version>2.3.1.RELEASE</version> -->
-		</dependency>
-		<!-- 自定义starter -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-data-redis</artifactId> -->
+<!-- 		</dependency> -->
+		<!-- 自定义starter，此组件的源码在github上，是一个单独的工程，工程名为zzw-spring-boot-starter，需要将自工程下载到本地然后install到本地仓库才可使用，否则要注释掉 -->
 		<dependency>
 			<groupId>com.asiainfo</groupId>
 			<artifactId>zzw-spring-boot-starter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- Actuator-对spb工程进行监控 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- 集成普罗米修斯 -->		
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 	</dependencies>
 
