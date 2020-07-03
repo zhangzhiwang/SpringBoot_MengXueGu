@@ -1,31 +1,24 @@
 package com.asiainfo.controller;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,8 +35,35 @@ public class HelloController {
 	private static Map<String, String> userMap;
 	@Autowired
 	private DataSource dataSource;
+	/**
+	 * @Resource：
+	 * 1、@Resource后面不添加任何属性则默认按照名称匹配，且名称为属性名，如果名称匹配成功则按照配型匹配
+	 * 2、@Resource如果只添加name属性，如：@Resource(name = "taskService123")，则只按照名称来匹配，如果名称匹配不成功就抛异常
+	 * 3、@Resource如果只添加type属性，测试结果有点出乎意料，并不是只按类型进行匹配，而还是先按照名称进行匹配如果匹配成功了就注入，否则按照配型匹配，和第一种情况是一样的
+	 * 4、@Resource如果既添加name属性又添加type属性，测试结果也有点出乎意料，这种情况和第二种情况一样，如果name匹配成功则注入，如果匹配不成功直接报错，不会再按照类型进行匹配。（这样看来貌似type属性没有什么用）
+	 *	
+	 * @Autowired：
+	 * @Autowired注解没有name和type属性，它只按照类型进行匹配，如果找不到则直接报错，如果找到多个则会按照名称进行匹配（默认将变量名作为bean的名称去匹配），如果匹配成功则注入，否则报错。
+	 * 上面说的是@Autowired的默认情况，当按照配型匹配发现多个bean而且被@Autowired的属性名和任何一个bean的名称都不匹配时，这时可以使用@Qualifier注解来告诉Spring哪个bean需要被注入
+	 * 
+	 * */
+//	@Resource(name = "taskService", type = TaskService.class)
 	@Autowired
-	private TaskService taskService;
+	/**
+	 * @Qualifier("taskService2")告诉Spring名称为“taskService2”的bean需要被注入。
+	 * 和下面注入集合元素的情况不一样，@Qualifier注解加在非集合元素上面的时候是用来告诉Spring要注入名称为taskService1的bean，而该bean的定义上面并不需要加@Qualifier注解，只是bean的名称是taskService1即可；
+	 * 而@Qualifier注解加在集合元素上面的时候是用来告诉Spring该集合只有符合标记的bean才能被注入并装进集合中，这个标记就是@Qualifier注解后面的value值，如下面的@Qualifier("zzw")，即将被注入并添加到集合中的bean在定义时必须加上同样的注解标记@Qualifier("zzw")。
+	 * */
+	@Qualifier("taskService1")
+	private TaskService taskService;// 该bean的定义在com.asiainfo.config.USConfig类中
+	
+	@Autowired// @Autowired可以注入List
+	@Qualifier("zzw")// 可以使用@Qualifier注解来声明哪些符合标记的注解才能被注入，本例中只用加了@Qualifier("zzw")标记的bean才能被注入
+	private List<TaskService> taskServiceList = new ArrayList<TaskService>();
+	
+	@Autowired// @Autowired可以注入Map，但需注意Map的key必须是String类型，Spring会将bean的名称作为key装入map中。
+	@Qualifier("zhangsan")// 本例中只用加了@Qualifier("zhangsan")标记的bean才能被注入
+	private Map<String, TaskService> taskServiceMap = new HashMap<String, TaskService>();
 	/**
 	 * 在mvc中整合redis需要在xml中进行整合配置，在spb中我们即没有进行手动配置xml也没有手动写配置类，下面的redisTemplate既然能够被Autowired说明该对象已存在于IOC容器中，那么这个工作是谁作的呢？</p>
 	 * 答案是spb的自动装配。spb和redis的整合只在pom文件中引入有redis的starter即可，无需其他工作。
@@ -54,6 +74,9 @@ public class HelloController {
 	private SqlSessionFactory sessionFactory;
 	@Autowired
 	private ZzwTemplate zzwTemplate;
+//	@Autowired
+//	@Qualifier
+//	private List<TaskService> list = new ArrayList<TaskService>();
 	
 	static {
 		userMap = new HashMap();
@@ -77,9 +100,13 @@ public class HelloController {
 //		redisTemplate.opsForValue().get("key1");// 本机事先安装好redis
 //		System.out.println("redisTemplate = " + redisTemplate);
 //		System.out.println("sessionFactory = " + sessionFactory);
-		System.out.println("zzwTemplate = " + zzwTemplate);
+//		System.out.println("zzwTemplate = " + zzwTemplate);
 //		String name = zzwTemplate.getName();
 //		System.out.println(name);
+		System.out.println(taskService);
+//		System.out.println("list = " + list);
+		System.out.println("taskServiceList = " + taskServiceList);
+		System.out.println("taskServiceMap = " + taskServiceMap);
 		return "Hello World!";
 	}
 	

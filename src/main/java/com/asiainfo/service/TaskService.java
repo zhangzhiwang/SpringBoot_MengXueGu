@@ -11,9 +11,24 @@ import org.springframework.stereotype.Service;
  */
 //@Service
 public class TaskService {
-	
-//	@Scheduled(fixedRate = 1000)
+	private String name;
+
+	public TaskService() {
+		super();
+	}
+
+	public TaskService(String name) {
+		super();
+		this.name = name;
+	}
+
+	// @Scheduled(fixedRate = 1000)
 	public void hello() {
 		System.out.println("hello");
+	}
+
+	@Override
+	public String toString() {
+		return "TaskService [name=" + name + "]";
 	}
 }

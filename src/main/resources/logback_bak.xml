@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 注意：日志配置文件名是logback.xml或者logback-spring.xml的时候不需要在全局配置文件里面指定即可加载，
-		另外，当配置文件名是logback-spring.xml比配置文件名是logback.xml多一个功能——指定profile，即可以根据具体的环境（开发/生产）指定激活具体的profile。
+		另外，当配置文件名是logback-spring.xml比配置文件名是logback.xml多一个功能——指定profile，即可以根据具体的环境（开发/生产）指定激活某个profile。
 		在全局配置文件中加入spring.profiles.active来指定激活哪个profile
  -->
 <!--梦学谷 www.mengxuegu.com
