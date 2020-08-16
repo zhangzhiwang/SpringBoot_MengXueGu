@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.asiainfo.entity.Person;
 import com.asiainfo.service.TaskService;
 import com.asiainfo.service.UserService;
-import com.asiainfo1.template.ZzwTemplate;
+//import com.asiainfo1.template.ZzwTemplate;
 
 // Spring Boot完全可以当作Spring MVC玩，完全可以使用Spring MVC的注解，因为Spring Boot默认依赖了Spring MVC的jar包
 @RestController// = @Controller + @ResponseBody
@@ -72,8 +72,8 @@ public class HelloController {
 //	private RedisTemplate<String, String> redisTemplate;
 	@Autowired
 	private SqlSessionFactory sessionFactory;
-	@Autowired
-	private ZzwTemplate zzwTemplate;
+//	@Autowired
+//	private ZzwTemplate zzwTemplate;
 //	@Autowired
 //	@Qualifier
 //	private List<TaskService> list = new ArrayList<TaskService>();

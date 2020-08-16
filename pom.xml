@@ -101,11 +101,11 @@
 <!-- 			<artifactId>spring-boot-starter-data-redis</artifactId> -->
 <!-- 		</dependency> -->
 		<!-- 自定义starter，此组件的源码在github上，是一个单独的工程，工程名为zzw-spring-boot-starter，需要将自工程下载到本地然后install到本地仓库才可使用，否则要注释掉 -->
-		<dependency>
-			<groupId>com.asiainfo</groupId>
-			<artifactId>zzw-spring-boot-starter</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.asiainfo</groupId> -->
+<!-- 			<artifactId>zzw-spring-boot-starter</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
 		<!-- Actuator-对spb工程进行监控 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
